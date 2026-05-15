@@ -183,13 +183,6 @@ Este repositorio NO contiene:
 
 ---
 
-# Nota de Seguridad
-
-Las imágenes Docker públicas pueden ser inspeccionadas por usuarios avanzados.
-
-Hacer privado el repositorio fuente NO garantiza protección completa de propiedad intelectual si las imágenes Docker permanecen públicas.
-
----
 
 # Proyecto
 
