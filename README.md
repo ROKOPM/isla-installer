@@ -1,35 +1,85 @@
 # ISLA de Datos Urbanos Installer
 
-Repositorio publico de instalacion para ISLA de Datos Urbanos 2025-2026.
+Repositorio público de instalación para ISLA de Datos Urbanos 2025-2026.
 
-Este repo no contiene el codigo fuente de la plataforma. Solo incluye el instalador, Docker Compose, plantilla de variables y scripts SQL de inicializacion de base de datos necesarios para levantar el sistema desde imagenes Docker publicadas en GHCR.
+Este repositorio NO contiene el código fuente principal de la plataforma.  
+Solo incluye:
 
-## Instalacion
+- instaladores multiplataforma
+- Docker Compose
+- plantillas de configuración
+- scripts mínimos de inicialización
+- integración con imágenes Docker publicadas en GHCR
+
+El backend, frontend, pipelines y lógica experimental permanecen en un repositorio privado.
+
+---
+
+# Instalación
+
+## Linux / WSL2 / macOS
+
+Ejecutar:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.sh | bash
 ```
 
-Si las imagenes GHCR estan privadas, primero inicia sesion:
+---
+
+## Windows PowerShell
+
+Requisitos:
+
+- Windows 10/11
+- Docker Desktop
+- Docker Compose v2
+- PowerShell
+
+Ejecutar:
+
+```powershell
+irm https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.ps1 | iex
+```
+
+También puede ejecutarse desde CMD:
+
+```cmd
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.ps1 | iex"
+```
+
+---
+
+# GHCR Privado
+
+Si las imágenes GHCR están privadas, iniciar sesión antes de instalar:
 
 ```bash
 echo TU_TOKEN | docker login ghcr.io -u ROKOPM --password-stdin
 ```
 
-El token necesita `read:packages`.
+El token necesita:
 
-## Requisitos
+```text
+read:packages
+```
+
+---
+
+# Requisitos
 
 - Docker
 - Docker Compose v2
 - Git
-- Runtime NVIDIA para Docker si se usara Ollama con GPU
-- Recomendado: 16 GB RAM minimo
-- Recomendado: 50 GB libres o mas
+- Recomendado: GPU NVIDIA para Ollama
+- Recomendado: 16 GB RAM mínimo
+- Recomendado: 50 GB libres o más
 
-## Imagenes Usadas
+---
 
-Imagenes propias:
+# Imágenes Utilizadas
+
+## Imágenes propias
 
 ```text
 ghcr.io/rokopm/isla-webservice:latest
@@ -40,16 +90,18 @@ ghcr.io/rokopm/isla-davis-poller:latest
 ghcr.io/rokopm/isla-nginx:latest
 ```
 
-Imagenes externas:
+## Imágenes externas
 
 ```text
 pgvector/pgvector:pg16
 ollama/ollama:latest
 ```
 
-## Configuracion
+---
 
-Durante la instalacion se crea un `.env` local desde `.env.template`.
+# Configuración
+
+Durante la instalación se crea un `.env` local desde `.env.template`.
 
 El instalador solicita:
 
@@ -59,7 +111,9 @@ El instalador solicita:
 
 El archivo `.env` nunca debe subirse al repositorio.
 
-## Operacion
+---
+
+# Operación
 
 Abrir:
 
@@ -67,7 +121,7 @@ Abrir:
 http://localhost
 ```
 
-Comandos utiles:
+Comandos útiles:
 
 ```bash
 docker compose ps
@@ -78,7 +132,11 @@ docker compose up -d
 docker compose down
 ```
 
-## Validacion
+---
+
+# Validación
+
+Linux/macOS/WSL:
 
 ```bash
 bash -n setup.sh
@@ -88,25 +146,59 @@ docker compose up -d
 curl -I http://localhost
 ```
 
+Windows PowerShell:
+
+```powershell
+docker compose config
+docker compose pull
+docker compose up -d
+curl http://localhost
+```
+
 Resultado esperado:
 
 ```text
 HTTP/1.1 200 OK
 ```
 
-## Seguridad
+---
 
-No contiene:
+# Seguridad
 
-- codigo fuente de Django
-- codigo fuente de workers
-- codigo fuente de frontend
+Este repositorio NO contiene:
+
+- código fuente Django
+- código fuente frontend
+- código fuente de workers
 - prompts privados
 - ETL privado
+- embeddings privados
 - `.env`
 - tokens
-- Davis API keys reales
+- API keys reales
 - backups
-- dumps de base de datos
+- dumps SQL sensibles
+- datasets
+- modelos Ollama
 
-Nota: las imagenes Docker publicas pueden ser inspeccionadas por usuarios avanzados. Para ocultar propiedad intelectual de forma fuerte no basta con hacer privado el repositorio fuente; tambien habria que endurecer el empaquetado de las imagenes.
+---
+
+# Nota de Seguridad
+
+Las imágenes Docker públicas pueden ser inspeccionadas por usuarios avanzados.
+
+Hacer privado el repositorio fuente NO garantiza protección completa de propiedad intelectual si las imágenes Docker permanecen públicas.
+
+---
+
+# Proyecto
+
+ISLA de Datos Urbanos 2025-2026 es una plataforma de análisis urbano basada en:
+
+- visión computacional
+- modelos multimodales
+- clustering conductual
+- embeddings semánticos
+- monitoreo ambiental
+- analítica temporal
+- minería de datos urbanos
