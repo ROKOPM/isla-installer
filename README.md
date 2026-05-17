@@ -1,31 +1,36 @@
 # ISLA de Datos Urbanos Installer
 
-Repositorio público de instalación para ISLA de Datos Urbanos 2025-2026.
+Repositorio publico de instalacion del pipeline central de ISLA de Datos Urbanos 2025-2026.
 
-Este repositorio NO contiene el código fuente principal de la plataforma.  
-Solo incluye:
+Este repositorio NO contiene el codigo fuente principal de la plataforma. Solo incluye:
 
 - instaladores multiplataforma
 - Docker Compose
-- plantillas de configuración
-- scripts mínimos de inicialización
-- integración con imágenes Docker publicadas en GHCR
+- plantillas de configuracion
+- scripts minimos de inicializacion
+- integracion con imagenes Docker publicadas en GHCR
 
-El backend, frontend, pipelines y lógica experimental permanecen en un repositorio privado.
+Codigo fuente y explicacion del proyecto:
+
+```text
+https://github.com/ROKOPM/Isladedatos2025-2026
+```
+
+Si tambien necesitas capturar imagenes desde una camara USB o RTSP, instala el nodo edge:
+
+```text
+https://github.com/ROKOPM/isla-edge-installer
+```
 
 ---
 
-# Instalación
+# Instalacion
 
 ## Linux / WSL2 / macOS
-
-Ejecutar:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.sh | bash
 ```
-
----
 
 ## Windows PowerShell
 
@@ -42,17 +47,35 @@ Ejecutar:
 irm https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.ps1 | iex
 ```
 
-También puede ejecutarse desde CMD:
+Tambien puede ejecutarse desde CMD:
 
 ```cmd
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.ps1 | iex"
+```
+
+## Windows con WSL2 Ubuntu
+
+```powershell
+wsl --install -d Ubuntu
+```
+
+Abrir Ubuntu y ejecutar:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ROKOPM/isla-installer/main/setup.sh | bash
+```
+
+Despues abre:
+
+```text
+http://localhost
 ```
 
 ---
 
 # GHCR Privado
 
-Si las imágenes GHCR están privadas, iniciar sesión antes de instalar:
+Si las imagenes GHCR estan privadas, iniciar sesion antes de instalar:
 
 ```bash
 echo TU_TOKEN | docker login ghcr.io -u ROKOPM --password-stdin
@@ -72,14 +95,14 @@ read:packages
 - Docker Compose v2
 - Git
 - Recomendado: GPU NVIDIA para Ollama
-- Recomendado: 16 GB RAM mínimo
-- Recomendado: 50 GB libres o más
+- Recomendado: 16 GB RAM minimo
+- Recomendado: 50 GB libres o mas
 
 ---
 
-# Imágenes Utilizadas
+# Imagenes Utilizadas
 
-## Imágenes propias
+## Imagenes propias
 
 ```text
 ghcr.io/rokopm/isla-webservice:latest
@@ -90,7 +113,7 @@ ghcr.io/rokopm/isla-davis-poller:latest
 ghcr.io/rokopm/isla-nginx:latest
 ```
 
-## Imágenes externas
+## Imagenes externas
 
 ```text
 pgvector/pgvector:pg16
@@ -99,9 +122,9 @@ ollama/ollama:latest
 
 ---
 
-# Configuración
+# Configuracion
 
-Durante la instalación se crea un `.env` local desde `.env.template`.
+Durante la instalacion se crea un `.env` local desde `.env.template`.
 
 El instalador solicita:
 
@@ -113,7 +136,7 @@ El archivo `.env` nunca debe subirse al repositorio.
 
 ---
 
-# Operación
+# Operacion
 
 Abrir:
 
@@ -121,7 +144,7 @@ Abrir:
 http://localhost
 ```
 
-Comandos útiles:
+Comandos utiles:
 
 ```bash
 docker compose ps
@@ -134,7 +157,7 @@ docker compose down
 
 ---
 
-# Validación
+# Validacion
 
 Linux/macOS/WSL:
 
@@ -167,9 +190,9 @@ HTTP/1.1 200 OK
 
 Este repositorio NO contiene:
 
-- código fuente Django
-- código fuente frontend
-- código fuente de workers
+- codigo fuente Django
+- codigo fuente frontend
+- codigo fuente de workers
 - prompts privados
 - ETL privado
 - embeddings privados
@@ -183,15 +206,14 @@ Este repositorio NO contiene:
 
 ---
 
-
 # Proyecto
 
-ISLA de Datos Urbanos 2025-2026 es una plataforma de análisis urbano basada en:
+ISLA de Datos Urbanos 2025-2026 es una plataforma de analisis urbano basada en:
 
-- visión computacional
+- vision computacional
 - modelos multimodales
 - clustering conductual
-- embeddings semánticos
+- embeddings semanticos
 - monitoreo ambiental
-- analítica temporal
-- minería de datos urbanos
+- analitica temporal
+- mineria de datos urbanos
